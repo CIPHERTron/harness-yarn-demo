@@ -2,13 +2,14 @@
 	"name": "todo_react_app",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://javascriptbear.github.io/todo_react_app",
 	"dependencies": {
 		"@mantine/core": "^4.2.12",
 		"@mantine/hooks": "^4.2.12",
 		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/react": "^13.3.0",
 		"@testing-library/user-event": "^13.5.0",
+		"jest": "^29.7.0",
+		"jest-junit": "^16.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-scripts": "5.0.1",
@@ -20,8 +21,16 @@
 		"deploy": "gh-pages -d build",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"test": "jest --config=jest.config.js",
 		"eject": "react-scripts eject"
+	},
+	"jest": {
+		"testEnvironment": "jsdom",
+		"coverageThreshold": {
+			"global": {
+				"lines": 80
+			}
+		}
 	},
 	"eslintConfig": {
 		"extends": [
@@ -42,6 +51,12 @@
 		]
 	},
 	"devDependencies": {
-		"gh-pages": "^4.0.0"
+		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+		"@babel/preset-env": "^7.23.2",
+		"@babel/preset-react": "^7.22.15",
+		"babel-jest": "^29.7.0",
+		"gh-pages": "^4.0.0",
+		"jest-environment-jsdom": "^29.7.0",
+		"react-test-renderer": "^18.2.0"
 	}
 }
