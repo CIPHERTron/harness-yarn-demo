@@ -8,36 +8,38 @@ import {
 	Group,
 	Card,
 	ActionIcon,
-	Code,
-} from '@mantine/core';
-import { useState, useRef, useEffect } from 'react';
-import { MoonStars, Sun, Trash } from 'tabler-icons-react';
+} from "@mantine/core"
+import { useState, useRef, useEffect } from "react"
+import { MoonStars, Sun, Trash } from "tabler-icons-react"
+import SuccessTest from "./components/SuccessTest"
+import FailTest from "./components/FailTest"
 
-import {
-	MantineProvider,
-	ColorSchemeProvider,
-	ColorScheme,
-} from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
-import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { MantineProvider, ColorSchemeProvider } from "@mantine/core"
+// import { useColorScheme } from '@mantine/hooks';
+import { useHotkeys, useLocalStorage } from "@mantine/hooks"
 
 export default function App() {
-	const [tasks, setTasks] = useState([]);
-	const [opened, setOpened] = useState(false);
+	const [tasks, setTasks] = useState([])
+	const [opened, setOpened] = useState(false)
 
-	const preferredColorScheme = useColorScheme();
+	// const preferredColorScheme = useColorScheme();
 	const [colorScheme, setColorScheme] = useLocalStorage({
-		key: 'mantine-color-scheme',
-		defaultValue: 'light',
+		key: "mantine-color-scheme",
+		defaultValue: "light",
 		getInitialValueInEffect: true,
-	});
-	const toggleColorScheme = value =>
-		setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+	})
+	const toggleColorScheme = (value) =>
+		setColorScheme(
+			value ||
+				(colorScheme === "dark"
+					? "light"
+					: "dark")
+		)
 
-	useHotkeys([['mod+J', () => toggleColorScheme()]]);
+	useHotkeys([["mod+J", () => toggleColorScheme()]])
 
-	const taskTitle = useRef('');
-	const taskSummary = useRef('');
+	const taskTitle = useRef("")
+	const taskSummary = useRef("")
 
 	function createTask() {
 		setTasks([
@@ -46,7 +48,7 @@ export default function App() {
 				title: taskTitle.current.value,
 				summary: taskSummary.current.value,
 			},
-		]);
+		])
 
 		saveTasks([
 			...tasks,
@@ -54,146 +56,270 @@ export default function App() {
 				title: taskTitle.current.value,
 				summary: taskSummary.current.value,
 			},
-		]);
+		])
 	}
 
 	function deleteTask(index) {
-		var clonedTasks = [...tasks];
+		var clonedTasks = [...tasks]
 
-		clonedTasks.splice(index, 1);
+		clonedTasks.splice(index, 1)
 
-		setTasks(clonedTasks);
+		setTasks(clonedTasks)
 
-		saveTasks([...clonedTasks]);
+		saveTasks([...clonedTasks])
 	}
 
 	function loadTasks() {
-		let loadedTasks = localStorage.getItem('tasks');
+		let loadedTasks = localStorage.getItem("tasks")
 
-		let tasks = JSON.parse(loadedTasks);
+		let tasks = JSON.parse(loadedTasks)
 
 		if (tasks) {
-			setTasks(tasks);
+			setTasks(tasks)
 		}
 	}
 
 	function saveTasks(tasks) {
-		localStorage.setItem('tasks', JSON.stringify(tasks));
+		localStorage.setItem("tasks", JSON.stringify(tasks))
 	}
 
 	useEffect(() => {
-		loadTasks();
-	}, []);
+		loadTasks()
+	}, [])
 
 	return (
 		<ColorSchemeProvider
 			colorScheme={colorScheme}
-			toggleColorScheme={toggleColorScheme}>
+			toggleColorScheme={toggleColorScheme}
+		>
 			<MantineProvider
-				theme={{ colorScheme, defaultRadius: 'md' }}
+				theme={{
+					colorScheme,
+					defaultRadius: "md",
+				}}
 				withGlobalStyles
-				withNormalizeCSS>
+				withNormalizeCSS
+			>
 				<div className='App'>
 					<Modal
 						opened={opened}
-						size={'md'}
-						title={'New Task'}
-						withCloseButton={false}
+						size={"md"}
+						title={"New Task"}
+						withCloseButton={
+							false
+						}
 						onClose={() => {
-							setOpened(false);
+							setOpened(
+								false
+							)
 						}}
-						centered>
+						centered
+					>
 						<TextInput
-							mt={'md'}
-							ref={taskTitle}
-							placeholder={'Task Title'}
+							mt={"md"}
+							ref={
+								taskTitle
+							}
+							placeholder={
+								"Task Title"
+							}
 							required
-							label={'Title'}
+							label={
+								"Title"
+							}
 						/>
 						<TextInput
-							ref={taskSummary}
-							mt={'md'}
-							placeholder={'Task Summary'}
-							label={'Summary'}
+							ref={
+								taskSummary
+							}
+							mt={"md"}
+							placeholder={
+								"Task Summary"
+							}
+							label={
+								"Summary"
+							}
 						/>
-						<Group mt={'md'} position={'apart'}>
+						<Group
+							mt={"md"}
+							position={
+								"apart"
+							}
+						>
 							<Button
 								onClick={() => {
-									setOpened(false);
+									setOpened(
+										false
+									)
 								}}
-								variant={'subtle'}>
+								variant={
+									"subtle"
+								}
+							>
 								Cancel
 							</Button>
 							<Button
 								onClick={() => {
-									createTask();
-									setOpened(false);
-								}}>
-								Create Task
+									createTask()
+									setOpened(
+										false
+									)
+								}}
+							>
+								Create
+								Task
 							</Button>
 						</Group>
 					</Modal>
 					<Container size={550} my={40}>
-						<Group position={'apart'}>
+						<Group
+							position={
+								"apart"
+							}
+						>
 							<Title
-								sx={theme => ({
+								sx={(
+									theme
+								) => ({
 									fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 									fontWeight: 900,
-								})}>
-								My Tasks
+								})}
+							>
+								My
+								Tasks
 							</Title>
 							<ActionIcon
-								color={'blue'}
-								onClick={() => toggleColorScheme()}
-								size='lg'>
-								{colorScheme === 'dark' ? (
-									<Sun size={16} />
+								color={
+									"blue"
+								}
+								onClick={() =>
+									toggleColorScheme()
+								}
+								size='lg'
+							>
+								{colorScheme ===
+								"dark" ? (
+									<Sun
+										size={
+											16
+										}
+									/>
 								) : (
-									<MoonStars size={16} />
+									<MoonStars
+										size={
+											16
+										}
+									/>
 								)}
 							</ActionIcon>
 						</Group>
-						{tasks.length > 0 ? (
-							tasks.map((task, index) => {
-								if (task.title) {
-									return (
-										<Card withBorder key={index} mt={'sm'}>
-											<Group position={'apart'}>
-												<Text weight={'bold'}>{task.title}</Text>
-												<ActionIcon
-													onClick={() => {
-														deleteTask(index);
-													}}
-													color={'red'}
-													variant={'transparent'}>
-													<Trash />
-												</ActionIcon>
-											</Group>
-											<Text color={'dimmed'} size={'md'} mt={'sm'}>
-												{task.summary
-													? task.summary
-													: 'No summary was provided for this task'}
-											</Text>
-										</Card>
-									);
+						{tasks.length >
+						0 ? (
+							tasks.map(
+								(
+									task,
+									index
+								) => {
+									if (
+										task.title
+									) {
+										return (
+											<Card
+												withBorder
+												key={
+													index
+												}
+												mt={
+													"sm"
+												}
+											>
+												<Group
+													position={
+														"apart"
+													}
+												>
+													<Text
+														weight={
+															"bold"
+														}
+													>
+														{
+															task.title
+														}
+													</Text>
+													<ActionIcon
+														onClick={() => {
+															deleteTask(
+																index
+															)
+														}}
+														color={
+															"red"
+														}
+														variant={
+															"transparent"
+														}
+													>
+														<Trash />
+													</ActionIcon>
+												</Group>
+												<Text
+													color={
+														"dimmed"
+													}
+													size={
+														"md"
+													}
+													mt={
+														"sm"
+													}
+												>
+													{task.summary
+														? task.summary
+														: "No summary was provided for this task"}
+												</Text>
+											</Card>
+										)
+									} else {
+										return 0
+									}
 								}
-							})
+							)
 						) : (
-							<Text size={'lg'} mt={'md'} color={'dimmed'}>
-								You have no tasks
+							<Text
+								size={
+									"lg"
+								}
+								mt={
+									"md"
+								}
+								color={
+									"dimmed"
+								}
+							>
+								You
+								have
+								no
+								tasks
 							</Text>
 						)}
 						<Button
 							onClick={() => {
-								setOpened(true);
+								setOpened(
+									true
+								)
 							}}
 							fullWidth
-							mt={'md'}>
+							mt={"md"}
+						>
 							New Task
 						</Button>
 					</Container>
+
+					<SuccessTest />
+					<FailTest />
 				</div>
 			</MantineProvider>
 		</ColorSchemeProvider>
-	);
+	)
 }
