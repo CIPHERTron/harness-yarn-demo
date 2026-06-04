@@ -13,17 +13,11 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: svcinline
+            serviceRef: testsvc
           environment:
             environmentRef: envgitx
             deployToAll: false
-            infrastructureDefinitions:
-              - identifier: testinfra
-                inputs:
-                  identifier: testinfra
-                  type: KubernetesDirect
-                  spec:
-                    connectorRef: <+input>
+            infrastructureDefinitions: <+input>
           execution:
             steps:
               - step:
@@ -34,6 +28,41 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
+              - step:
+                  type: Verify
+                  name: Verify_1
+                  identifier: Verify_1
+                  spec:
+                    isMultiServicesOrEnvs: false
+                    type: Rolling
+                    monitoredService:
+                      type: Default
+                      spec: {}
+                    spec:
+                      sensitivity: HIGH
+                      duration: 15m
+                  timeout: 2h
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - Verification
+                        action:
+                          type: ManualIntervention
+                          spec:
+                            timeout: 2h
+                            onTimeout:
+                              action:
+                                type: StageRollback
+                    - onFailure:
+                        errors:
+                          - Unknown
+                        action:
+                          type: ManualIntervention
+                          spec:
+                            timeout: 2h
+                            onTimeout:
+                              action:
+                                type: Ignore
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
