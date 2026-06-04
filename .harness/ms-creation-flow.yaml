@@ -9,5 +9,20 @@ monitoredService:
   environmentRef: envgitx
   environmentRefList:
   - envgitx
-  sources: {}
+  sources:
+    healthSources:
+    - name: edlkrjkejf
+      identifier: edlkrjkejf
+      type: DatadogLog
+      spec:
+        connectorRef: ddgconn
+        feature: Datadog Cloud Logs
+        queries:
+        - name: Datadog Logs Query
+          query: |
+            env:prod service:payment-api status:error
+          indexes:
+          - ejndejhb
+          - ""
+          serviceInstanceIdentifier: test
   enabled: false
