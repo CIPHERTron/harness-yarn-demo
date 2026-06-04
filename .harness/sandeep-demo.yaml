@@ -20,7 +20,7 @@ monitoredService:
         queries:
         - name: Datadog Logs Query
           query: |
-            env:prod service:payment-api status:warning
+            env:prod service:payment-api status:error
           indexes:
           - test
           serviceInstanceIdentifier: pod
