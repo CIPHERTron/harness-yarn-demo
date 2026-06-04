@@ -9,5 +9,19 @@ monitoredService:
   environmentRef: testenv
   environmentRefList:
   - testenv
-  sources: {}
+  sources:
+    healthSources:
+    - name: ddg-test
+      identifier: ddgtest
+      type: DatadogLog
+      spec:
+        connectorRef: ddgconn
+        feature: Datadog Cloud Logs
+        queries:
+        - name: Datadog Logs Query
+          query: |
+            env:prod service:payment-api status:error
+          indexes:
+          - test
+          serviceInstanceIdentifier: pod
   enabled: false
