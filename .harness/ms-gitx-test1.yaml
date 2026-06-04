@@ -1,0 +1,13 @@
+monitoredService:
+  orgIdentifier: default
+  projectIdentifier: gitxtest
+  identifier: testsvc_testenv
+  name: testsvc_testenv
+  type: Application
+  description: ""
+  serviceRef: testsvc
+  environmentRef: testenv
+  environmentRefList:
+  - testenv
+  sources: {}
+  enabled: false
