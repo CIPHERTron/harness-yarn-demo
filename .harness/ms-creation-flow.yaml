@@ -24,5 +24,6 @@ monitoredService:
           indexes:
           - ejndejhb
           - ""
+          - nswijhjhsw
           serviceInstanceIdentifier: test
   enabled: false
