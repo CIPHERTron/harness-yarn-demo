@@ -9,5 +9,45 @@ monitoredService:
   environmentRef: envinline
   environmentRefList:
   - envinline
-  sources: {}
+  sources:
+    healthSources:
+    - name: redxslk
+      identifier: redxslk
+      type: DatadogMetrics
+      spec:
+        connectorRef: ddgconn
+        metricPacks:
+        - identifier: Custom
+        feature: Datadog Cloud Metrics
+        metricDefinitions:
+        - identifier: q
+          metricName: q
+          riskProfile:
+            category: Performance
+            metricType: OTHER
+            riskCategory: Performance_Other
+            thresholdTypes:
+            - ACT_WHEN_HIGHER
+          analysis:
+            liveMonitoring:
+              enabled: true
+            deploymentVerification:
+              enabled: false
+              serviceInstanceFieldName: ""
+            riskProfile:
+              category: Performance
+              metricType: OTHER
+              riskCategory: Performance_Other
+              thresholdTypes:
+              - ACT_WHEN_HIGHER
+          sli:
+            enabled: false
+          dashboardName: g1
+          metricPath: q
+          query: "avg:container.cpu.usage{*}.rollup(avg, 60)"
+          metric: container.cpu.usage
+          aggregation: avg
+          serviceInstanceIdentifierTag: ""
+          isManualQuery: true
+          isCustomCreatedMetric: true
   enabled: false
