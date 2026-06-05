@@ -13,21 +13,14 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: testsvc
+            serviceRef: realsvc
           environment:
-            environmentRef: envgitx
+            environmentRef: realenv
             deployToAll: false
-            infrastructureDefinitions: <+input>
+            infrastructureDefinitions:
+              - identifier: infra
           execution:
             steps:
-              - step:
-                  name: Rollout Deployment
-                  identifier: rolloutDeployment
-                  type: K8sRollingDeploy
-                  timeout: 10m
-                  spec:
-                    skipDryRun: false
-                    pruningEnabled: false
               - step:
                   type: Verify
                   name: Verify_1
