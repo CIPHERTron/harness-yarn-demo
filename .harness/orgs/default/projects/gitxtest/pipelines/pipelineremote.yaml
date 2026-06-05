@@ -37,7 +37,8 @@ pipeline:
                     type: Rolling
                     monitoredService:
                       type: Default
-                      spec: {}
+                      spec:
+                        branch: main
                     spec:
                       sensitivity: HIGH
                       duration: 15m
