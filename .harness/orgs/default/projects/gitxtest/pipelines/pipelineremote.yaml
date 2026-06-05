@@ -13,9 +13,9 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: svcinline
+            serviceRef: testsvc
           environment:
-            environmentRef: envinline
+            environmentRef: envgitx
             deployToAll: false
             infrastructureDefinitions: <+input>
           execution:
@@ -37,7 +37,8 @@ pipeline:
                     type: Rolling
                     monitoredService:
                       type: Default
-                      spec: {}
+                      spec:
+                        branch: test-ms-gitx
                     spec:
                       sensitivity: HIGH
                       duration: 15m
