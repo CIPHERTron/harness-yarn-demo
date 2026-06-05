@@ -31,7 +31,7 @@ pipeline:
                     monitoredService:
                       type: Default
                       spec:
-                        branch: test-ms-gitx
+                        branch: main
                     spec:
                       sensitivity: HIGH
                       duration: 15m
