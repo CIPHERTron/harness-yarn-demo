@@ -20,7 +20,7 @@ monitoredService:
         queries:
         - name: Datadog Logs Query
           query: |
-            env:prod service:payment-api status:error
+            env:prod service:payment-api
           indexes:
           - ejndejhb
           - ""
