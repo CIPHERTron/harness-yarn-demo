@@ -13,9 +13,9 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: testsvc
+            serviceRef: svcinline
           environment:
-            environmentRef: envgitx
+            environmentRef: envinline
             deployToAll: false
             infrastructureDefinitions: <+input>
           execution:
