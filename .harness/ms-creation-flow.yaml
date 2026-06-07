@@ -22,8 +22,7 @@ monitoredService:
           query: |
             env:prod service:payment-api status:error
           indexes:
-          - ejndejhb
           - ""
-          - nswijhjhsw
+          - test-idx
           serviceInstanceIdentifier: test
   enabled: false
