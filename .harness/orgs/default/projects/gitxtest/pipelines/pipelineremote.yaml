@@ -13,12 +13,17 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: realsvc
+            serviceRef: testsvc
           environment:
-            environmentRef: realenv
+            environmentRef: envgitx
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: infra
+              - identifier: testinfra
+                inputs:
+                  identifier: testinfra
+                  type: KubernetesDirect
+                  spec:
+                    connectorRef: <+input>
           execution:
             steps:
               - step:
@@ -30,8 +35,7 @@ pipeline:
                     type: Rolling
                     monitoredService:
                       type: Default
-                      spec:
-                        branch: main
+                      spec: {}
                     spec:
                       sensitivity: HIGH
                       duration: 15m
