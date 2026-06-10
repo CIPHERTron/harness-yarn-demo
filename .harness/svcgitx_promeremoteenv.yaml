@@ -1,0 +1,28 @@
+monitoredService:
+  orgIdentifier: default
+  projectIdentifier: gitxtest
+  identifier: svcgitx_promeremoteenv
+  name: svcgitx_promeremoteenv
+  type: Application
+  description: ""
+  serviceRef: svcgitx
+  environmentRef: promeremoteenv
+  environmentRefList:
+  - promeremoteenv
+  sources:
+    healthSources:
+    - name: edlkrjkejf
+      identifier: edlkrjkejf
+      type: DatadogLog
+      spec:
+        connectorRef: ddgconn
+        feature: Datadog Cloud Logs
+        queries:
+        - name: Datadog Logs Query
+          query: |
+            env:prod service:payment-api status:error
+          indexes:
+          - ""
+          - test-idx
+          serviceInstanceIdentifier: test
+  enabled: false
