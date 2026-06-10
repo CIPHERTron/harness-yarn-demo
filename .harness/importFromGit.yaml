@@ -8,6 +8,6 @@ monitoredService:
   serviceRef: promesvc01
   environmentRef: realenv
   environmentRefList:
-  - testenv
+  - realenv
   sources: {}
   enabled: false
