@@ -1,0 +1,13 @@
+monitoredService:
+  orgIdentifier: default
+  projectIdentifier: gitxtest
+  identifier: promesvc01_realenv
+  name: promesvc01_realenv
+  type: Application
+  description: ""
+  serviceRef: promesvc01
+  environmentRef: realenv
+  environmentRefList:
+  - testenv
+  sources: {}
+  enabled: false
