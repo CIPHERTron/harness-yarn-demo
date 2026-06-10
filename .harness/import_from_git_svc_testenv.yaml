@@ -1,0 +1,28 @@
+monitoredService:
+  orgIdentifier: default
+  projectIdentifier: gitxtest
+  identifier: import_from_git_svc_testenv
+  name: import_from_git_svc_testenv
+  type: Application
+  description: ""
+  serviceRef: import_from_git_svc
+  environmentRef: testenv
+  environmentRefList:
+  - testenv
+  sources:
+    healthSources:
+    - name: edlkrjkejf
+      identifier: edlkrjkejf
+      type: DatadogLog
+      spec:
+        connectorRef: ddgconn
+        feature: Datadog Cloud Logs
+        queries:
+        - name: Datadog Logs Query
+          query: |
+            env:prod service:payment-api status:error
+          indexes:
+          - ""
+          - test-idx
+          serviceInstanceIdentifier: test
+  enabled: false
